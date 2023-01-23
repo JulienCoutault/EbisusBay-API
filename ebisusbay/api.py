@@ -54,8 +54,9 @@ class Api:
         params['direction']  = self.DIRECTION_ASC
         params['pageSize']   = 1
         params['page']       = 1
+        listings             = self.get('/listings', params)['listings']
 
-        return self.get('/listings', params)['listings'][0]
+        return listings[0] if len(listings) > 0 else None
 
     def get_collections(self, params: dict = {}) -> list:
         return self.get('/collections', params)['collections']
