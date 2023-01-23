@@ -16,7 +16,7 @@ class Api:
 
     #####################################
     #                                   #
-    #             Request               #
+    #            Collections            #
     #                                   #
     #####################################
     def get_all_collections(self, params: dict = {}) -> list:
@@ -29,6 +29,10 @@ class Api:
 
         return collections
     
+    def get_collection(self, collection_address: str, params: dict = {}) -> dict:
+        params['collection'] = collection_address
+        return self.get('/collections', params)['collections'][0]
+
     def get_collections(self, params: dict = {}) -> list:
         return self.get('/collections', params)['collections']
 
@@ -38,6 +42,11 @@ class Api:
         return self.get('/fullcollections', params)['nfts']
         
 
+    #####################################
+    #                                   #
+    #               Other               #
+    #                                   #
+    #####################################
     def get_listings(self, params: dict = {}) -> list:
         return self.get('/listings', params)['listings']
 
