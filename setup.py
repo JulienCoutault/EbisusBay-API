@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="ebisusbay",
-    version='0.1.1',
+    version='0.1.2',
     description='Python Wrapper for ebisusbay.com API',
     long_description_content_type='text/markdown',
     url='https://github.com/JulienCoutault/EbisusBay-API',
