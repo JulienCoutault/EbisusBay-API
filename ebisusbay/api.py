@@ -4,6 +4,19 @@
 import requests
 
 class Api:
+    DIRECTION_ASC  = 'asc'
+    DIRECTION_DESC = 'desc'
+
+    LISTING_STATE_ACTIVE = 0
+    LISTING_STATE_SOLD   = 1
+    LISTING_STATE_CANCEL = 2
+
+    LISTING_SORT_ID        = 'listingId'
+    LISTING_SORT_TIME      = 'listingTime'
+    LISTING_SORT_SALE_TIME = 'saleTime'
+    LISTING_SORT_PRICE     = 'price'
+    LISTING_SORT_RANK      = 'rank'
+
     def __init__(self):
         self.url = 'https://api.ebisusbay.com'
 
@@ -31,7 +44,18 @@ class Api:
     
     def get_collection(self, collection_address: str, params: dict = {}) -> dict:
         params['collection'] = collection_address
+
         return self.get('/collections', params)['collections'][0]
+
+    def get_collection_floor(self, collection_address: str, params: dict = {}) -> dict:
+        params['collection'] = collection_address
+        params['state']      = self.LISTING_STATE_ACTIVE
+        params['sortBy']     = self.LISTING_SORT_PRICE
+        params['direction']  = self.DIRECTION_ASC
+        params['pageSize']   = 1
+        params['page']       = 1
+
+        return self.get('/listings', params)['listings'][0]
 
     def get_collections(self, params: dict = {}) -> list:
         return self.get('/collections', params)['collections']
