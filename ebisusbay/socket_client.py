@@ -11,14 +11,7 @@ class SocketClient():
         self.url    = 'wss://api.ebisusbay.com'
         self.sio    = socketio.Client()
         self.debug  = debug
-        self.events = {
-            'Listed'       : [],
-            'Sold'         : [],
-            'Cancelled'    : [],
-            'OfferMade'    : [],
-            'OfferUpdated' : [],
-            'OfferAccepted': []
-        }
+        self.events = {}
 
         self.sio.on('connect', lambda: self.on_connect())
         self.sio.on('*', lambda message, data: self.on_all(message, data))
@@ -47,6 +40,9 @@ class SocketClient():
         print("Disconnected!")
 
     def add_event(self, message: str, func) -> None:
+        if message not in self.events.keys():
+            self.events[message] = []
+            
         self.events[message].append(func)
 
     def set_event(self, message: str, func) -> None:
