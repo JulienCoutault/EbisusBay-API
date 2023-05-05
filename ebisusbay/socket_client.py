@@ -6,7 +6,7 @@ import json
 import socketio
 
 
-class SocketClient():
+class SocketClient:
     def __init__(self, debug: bool = True):
         self.url = 'wss://api.ebisusbay.com'
         self.sio = socketio.Client()

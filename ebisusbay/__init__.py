@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from ebisusbay import api, socket_client
+from . import api, socket_client, collection
 
 Api = api.Api
 SocketClient = socket_client.SocketClient
+
+Collection = collection.Collection

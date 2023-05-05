@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # coding: utf8
 
-from var_dump import var_dump
 
 class Collection:
     api = None
@@ -16,6 +15,14 @@ class Collection:
             self.data = {}
         elif isinstance(data, dict):
             self.address = data['address']
+            self.data = self.parse_data(data)
+
+    def fetch_data(self):
+        params = {
+            'address': self.address
+        }
+        data = self.api.get('/collectioninfo', params)['collections'][0]
+        if data:
             self.data = self.parse_data(data)
 
     def parse_data(self, data: dict) -> dict:
@@ -69,7 +76,5 @@ class Collection:
             params['sortBy'] = self.api.LISTING_SORT_PRICE
         if 'state' not in params:
             params['state'] = self.api.LISTING_STATE_ACTIVE
-
-        var_dump(params)
 
         return self.api.get_listings(params)
