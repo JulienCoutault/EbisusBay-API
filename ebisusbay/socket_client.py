@@ -6,11 +6,12 @@ import socketio
 import json
 from functools import *
 
+
 class SocketClient():
     def __init__(self, debug: bool = True):
-        self.url    = 'wss://api.ebisusbay.com'
-        self.sio    = socketio.Client()
-        self.debug  = debug
+        self.url = 'wss://api.ebisusbay.com'
+        self.sio = socketio.Client()
+        self.debug = debug
         self.events = {}
 
         self.sio.on('connect', lambda: self.on_connect())
@@ -30,11 +31,14 @@ class SocketClient():
             for func in self.events[message]:
                 func(data)
 
+
     def on_connect(self):
         print("Connected!")
 
+
     def on_connect_error(self):
         print("The connection failed!")
+
 
     def on_disconnect(self):
         print("Disconnected!")
@@ -47,4 +51,3 @@ class SocketClient():
 
     def set_event(self, message: str, func) -> None:
         self.events[message] = [func]
-
