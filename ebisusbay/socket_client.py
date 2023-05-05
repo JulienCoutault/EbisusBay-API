@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # coding: utf8
 
-import socketio
-
 import json
-from functools import *
+
+import socketio
 
 
 class SocketClient():
@@ -31,14 +30,11 @@ class SocketClient():
             for func in self.events[message]:
                 func(data)
 
-
     def on_connect(self):
         print("Connected!")
 
-
     def on_connect_error(self):
         print("The connection failed!")
-
 
     def on_disconnect(self):
         print("Disconnected!")
