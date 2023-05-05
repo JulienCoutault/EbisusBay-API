@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # coding: utf8
 
+from typing import Optional
+
 import requests
+from .collection import Collection
 
 
 class Api:
@@ -43,12 +46,16 @@ class Api:
 
         return collections
     
-    def get_collection(self, collection_address: str, params: dict = {}) -> dict:
+    def get_collection(self, collection_address: str, params: dict = {}) -> Optional[Collection]:
         params['address'] = collection_address
 
-        return self.get('/collectioninfo', params)['collections'][0]
+        res = self.get('/collectioninfo', params)['collections'][0]
+        if res:
+            return Collection(self, res)
 
-    def get_collection_floor(self, collection_address: str, params: dict = {}) -> dict:
+        return None
+
+    def get_collection_floor(self, collection_address: str, params: dict = {}) -> Optional[int]:
         params['collection'] = collection_address
         params['state'] = self.LISTING_STATE_ACTIVE
         params['sortBy'] = self.LISTING_SORT_PRICE
@@ -57,10 +64,14 @@ class Api:
         params['page'] = 1
         listings = self.get('/listings', params)['listings']
 
-        return listings[0] if len(listings) > 0 else None
+        return int(listings[0]['price']) if len(listings) > 0 else None
 
-    def get_collections(self, params: dict = {}) -> list:
-        return [self.get('/collectioninfo', params)['collections']]
+    def get_collections(self, params: dict = {}) -> Optional[list]:
+        res = self.get('/collectioninfo', params)
+        if 'collections' in res:
+            return [Collection(self, x) for x in res['collections']]
+
+        return None
 
     def get_full_collection(self, collection_address: str, params: dict = {}) -> dict:
         params['address'] = collection_address
