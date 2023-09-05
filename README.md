@@ -2,7 +2,7 @@
 
 A Python 3 implementation of the ebisusbay.com REST API.
 
-Ebisu's Bay API docs : https://docs.ebisusbay.com/ 
+Ebisu's Bay API docs : https://ebisusbay.readme.io/reference/getting-started
 
 ## Installation
 ```
