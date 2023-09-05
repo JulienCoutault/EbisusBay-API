@@ -34,7 +34,7 @@ class Collection:
             'active': to_int,
             'complete': to_int,
             'sales': to_int,
-            'floorPrice': to_int,
+            'floorPrice': to_float,
             'avgSalePrice': to_float,
             'volume': to_float,
             'volume1d': to_float,
