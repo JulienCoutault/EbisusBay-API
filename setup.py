@@ -17,7 +17,8 @@ setup(
     install_requires=[
         'requests >= 2.30.0',
         'setuptools >= 67.7.2',
-        'python-socketio >= 5.8.0'
+        'python-socketio >= 5.8.0',
+        'pytest >= 7.4'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
