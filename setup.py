@@ -15,7 +15,9 @@ setup(
     license='MIT',
     packages=['ebisusbay'],
     install_requires=[
-        'requests',
+        'requests >= 2.30.0',
+        'setuptools >= 67.7.2',
+        'python-socketio >= 5.8.0'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
