@@ -18,6 +18,13 @@ def test_get_collections() -> None:
     assert type(res) is list
 
 
+def test_get_collection() -> None:
+    api = setup_api()
+    res = api.get_collections()
+
+    assert type(res) is list
+
+
 def test_get_listings() -> None:
     api = setup_api()
     res = api.get_listings()
